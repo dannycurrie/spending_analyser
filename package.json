@@ -4,6 +4,9 @@
   "description": "script(s) to analyse personal spening",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "run": "node spending.js"
+  },
   "dependencies": {
     "csv-parse": "^4.8.3"
   }

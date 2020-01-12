@@ -1,28 +1,31 @@
+const fs = require('fs');
+
 const matchTerm = (term, value) =>
   value.toLowerCase().includes(term.toLowerCase());
 
 const makeCatgeoryMatcher = categoryTerms => ({ description }) =>
   categoryTerms.some(term => matchTerm(term, description));
 
-const billsTerms = [
-  'TONIK',
-  'NETFLIX',
-  'COUNCIL TAX',
-  'THAMES WATER',
-  'CHILDCARE',
-  'NOWTV',
-  'Amazon Prime'
-];
-const foodShoppingTerms = ['ALDI', 'M&S', 'MORRISON', 'TESCO'];
-const eatingOutTerms = ['CAFE', 'BASIL & GRAPE', 'Just Eat'];
+let matchers = null;
 
-const matchers = {
-  bills: makeCatgeoryMatcher(billsTerms),
-  foodShopping: makeCatgeoryMatcher(foodShoppingTerms),
-  eatingOut: makeCatgeoryMatcher(eatingOutTerms)
+const getMatchers = () => {
+  if (matchers) return matchers;
+
+  matchers = {};
+
+  fs.readdirSync('./categories/').forEach(file => {
+    console.log('initialising matcher: ', file);
+    const fileContent = fs.readFileSync('./categories/' + file, 'utf8');
+    const terms = fileContent
+      .split('\n')
+      .reduce((prev, curr) => [...prev, curr], []);
+    matchers[file] = makeCatgeoryMatcher(terms);
+  });
+  return matchers;
 };
 
 const categoriseRecord = record => {
+  const matchers = getMatchers();
   let newRecord = { ...record };
   Object.keys(matchers).some(key => {
     if (matchers[key](record)) {
