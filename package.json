@@ -1,0 +1,10 @@
+{
+  "name": "spending_analysis",
+  "version": "1.0.0",
+  "description": "script(s) to analyse personal spening",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "csv-parse": "^4.8.3"
+  }
+}

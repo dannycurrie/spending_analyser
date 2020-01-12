@@ -1,0 +1,8 @@
+# dependencies
+/node_modules
+
+yarn-debug.log*
+yarn-error.log*
+
+# data
+/put_data_here/*
