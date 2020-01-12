@@ -4,5 +4,7 @@
 yarn-debug.log*
 yarn-error.log*
 
+.DS_Store
+
 # data
-/put_data_here/*
+*.csv

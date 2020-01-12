@@ -1,4 +1,5 @@
 const parse = require('csv-parse/lib/sync');
+const stringify = require('csv-stringify/lib/sync');
 const fs = require('fs');
 const { arrayToRecordObject } = require('./utils');
 const { categoriseRecord } = require('./categoriser');
@@ -17,4 +18,4 @@ const records = recordsRaw.map(arrayToRecordObject);
 const categorisedRecords = records.map(categoriseRecord);
 
 // write output
-console.log('categorisedRecords: ', categorisedRecords);
+fs.writeFileSync('output.csv', stringify(categorisedRecords));
