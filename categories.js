@@ -8,12 +8,14 @@ const makeCatgeoryMatcher = categoryTerms => ({ description }) =>
 
 let matchers = null;
 
+const getCategories = () => fs.readdirSync('./categories/');
+
 const getMatchers = () => {
   if (matchers) return matchers;
 
   matchers = {};
 
-  fs.readdirSync('./categories/').forEach(file => {
+  getCategories().forEach(file => {
     const fileContent = fs.readFileSync('./categories/' + file, 'utf8');
 
     if (fileContent.length > 0) {
