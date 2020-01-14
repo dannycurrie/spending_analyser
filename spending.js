@@ -6,6 +6,7 @@ const { categoriseRecord } = require('./categoriser');
 
 // CONSTANTS
 const dataPath = './put_data_here/data.csv';
+const outputPath = './output/';
 
 const input = fs.readFileSync(dataPath, 'utf8');
 
@@ -17,5 +18,8 @@ const records = recordsRaw.map(arrayToRecordObject);
 // append categories
 const categorisedRecords = records.map(categoriseRecord);
 
+const uncategorised = categorisedRecords.filter(record => !record.category);
+
 // write output
-fs.writeFileSync('output.csv', stringify(categorisedRecords));
+fs.writeFileSync(outputPath + 'categorised.csv', stringify(categorisedRecords));
+fs.writeFileSync(outputPath + 'uncategorised.csv', stringify(uncategorised));

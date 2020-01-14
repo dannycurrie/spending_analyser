@@ -14,12 +14,15 @@ const getMatchers = () => {
   matchers = {};
 
   fs.readdirSync('./categories/').forEach(file => {
-    console.log('initialising matcher: ', file);
     const fileContent = fs.readFileSync('./categories/' + file, 'utf8');
-    const terms = fileContent
-      .split('\n')
-      .reduce((prev, curr) => [...prev, curr], []);
-    matchers[file] = makeCatgeoryMatcher(terms);
+
+    if (fileContent.length > 0) {
+      console.log('initialising matcher: ', file);
+      const terms = fileContent
+        .split('\n')
+        .reduce((prev, curr) => [...prev, curr], []);
+      matchers[file] = makeCatgeoryMatcher(terms);
+    }
   });
   return matchers;
 };
