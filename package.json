@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "csv-parse": "^4.8.3",
-    "csv-stringify": "^5.3.6"
+    "csv-stringify": "^5.3.6",
+    "ramda": "^0.26.1"
   }
 }
